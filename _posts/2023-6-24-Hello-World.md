@@ -6,4 +6,7 @@ published: true
 
 This is a test blog post
 
-![_config.yml]({{ site.baseurl }}/images/config.png)
+This is a test blog post
+
+$$ \nabla_\boldsymbol{x} J(\boldsymbol{x}) $$
+
