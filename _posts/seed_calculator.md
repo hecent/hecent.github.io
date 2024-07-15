@@ -2,7 +2,7 @@
 layout: calculator
 title: Seed Calculator
 calculation_function: customCalculation
-custom_js: /assets/js/custom_calculations.js
+custom_js: /assets/js/randomSkinParameters.js
 ---
 
 <label for="seed">Seed: </label>
