@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <script src="{{ '/assets/js/calculator.js' | relative_url }}" defer></script>
+    {% if page.custom_js %}
+    <script src="{{ page.custom_js | relative_url }}" defer></script>
+    {% endif %}
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>{{ page.title }}</h1>
+        <form id="calculator-form" onsubmit="return calculate(event, '{{ page.calculation_function }}')">
+            {{ content }}
+            <button type="submit">Submit</button>
+        </form>
+        <div id="result"></div>
+    </div>
+</body>
+</html>
