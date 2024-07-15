@@ -1,34 +1,29 @@
-document.getElementById("seedForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            let seed = parseFloat(document.getElementById("seed").value);
-            let xmin = parseFloat(document.getElementById("xmin").value);
-            let xmax = parseFloat(document.getElementById("xmax").value);
-            let ymin = parseFloat(document.getElementById("ymin").value);
-            let ymax = parseFloat(document.getElementById("ymax").value);
-            let rmin = parseFloat(document.getElementById("rmin").value);
-            let rmax = parseFloat(document.getElementById("rmax").value);
-           
-            
-            
-                let values = ValveLinearCongruentialGenerator(seed);
-                xoffset = lerp(xmin, xmax, values[0]);
-                yoffset = lerp(ymin, ymax, values[1]);
-                rotation = lerp(rmin, rmax, values[2]);
-                document.getElementById("result").textContent = 
-                `x-offset: ${xoffset}<br>
-                y-offset: ${yoffset}<br>
-                Rotation: ${rotation}`;
-            
-        });
+function customCalculation(inputs) {
+    let seed = inputs.seed;
+    let xmin = inputs.xmin;
+    let xmax = inputs.xmax;
+    let ymin = inputs.ymin;
+    let ymax = inputs.ymax;
+    let rmin = inputs.rmin;
+    let rmax = inputs.rmax;
 
-function lerp(a, b, t){
-	return (b - a) * t + a;
+    let values = ValveLinearCongruentialGenerator(seed);
+    let xoffset = lerp(xmin, xmax, values[0]);
+    let yoffset = lerp(ymin, ymax, values[1]);
+    let rotation = lerp(rmin, rmax, values[2]);
+
+    return `x-offset: ${xoffset}<br>
+            y-offset: ${yoffset}<br>
+            Rotation: ${rotation}`;
+}
+
+function lerp(a, b, t) {
+    return (b - a) * t + a;
 }
 
 function ValveLinearCongruentialGenerator(seed) {
-    const M = 2147483647;  // 2^31 - 1
-    const A = 16807;       // 7^5
+    const M = 2147483647;
+    const A = 16807;
     const R = M % A;
     const Q = Math.floor(M / A);
     const NDIV = Math.floor((M - 1) / 32) + 1;
@@ -37,7 +32,6 @@ function ValveLinearCongruentialGenerator(seed) {
     let values = [];
     let y;
 
-    // Initialization steps similar to Python __init__
     for (let i = 0; i < 8; i++) {
         LCG();
     }
@@ -78,7 +72,6 @@ function ValveLinearCongruentialGenerator(seed) {
         return (result * (float_range[1] - float_range[0])) + float_range[0];
     }
 
-    // Generating and returning the first 3 floats
     let floats = [];
     for (let i = 0; i < 3; i++) {
         floats.push(random_float([0.0, 1.0]));
